@@ -66,7 +66,8 @@ const Film = mongoose.model('films', filmSchema);
 
 // TODO: create a schema for 'person' and use it to create the model for it below
 const personSchema = new Schema({
-  name:String,
+
+  name:{type: String, required: true},
   mass: String,
   hair_color: String, 
   skin_color: String, 
@@ -98,7 +99,7 @@ const personSchema = new Schema({
   }]
 });
 
-const Person = mongoose.model('people', filmSchema);
+const Person = mongoose.model('people', personSchema);
 
 
 // exports all the models in an object to be used in the controller
