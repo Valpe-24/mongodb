@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb+srv://valerieperez24:ZUhKbOjDP874aHYD@cluster0.vswo9ls.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URI = 'mongodb+srv://valerieperez24:ZUhKbOjDP874aHYD@cluster1.kfbtpak.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // sets the name of the DB that our collections are part of
-  dbName: 'starwars'
+  dbName: 'b=starwars',
 })
   .then(() => console.log('Connected to Mongo DB.'))
   .catch(err => console.log(err));
@@ -33,7 +33,7 @@ const speciesSchema = new Schema({
 });
 
 // creats a model for the 'species' collection that will be part of the export
-const Species = mongoose.model('species', speciesSchema);
+const Species = mongoose.model('specie', speciesSchema);
 
 
 // TODO: create a schema for 'planet' and use it to create the model for it below
@@ -49,7 +49,7 @@ const planetSchema = new Schema({
   population: Number
 });
 
-const Planet = mongoose.model('planets', planetSchema);
+const Planet = mongoose.model('planet', planetSchema);
 
 // TODO: create a schema for 'film' and use it to create the model for it below
 const filmSchema = new Schema({
@@ -61,7 +61,7 @@ const filmSchema = new Schema({
   release_date: Date 
 });
 
-const Film = mongoose.model('films', filmSchema);
+const Film = mongoose.model('film', filmSchema);
 
 
 // TODO: create a schema for 'person' and use it to create the model for it below
@@ -77,29 +77,29 @@ const personSchema = new Schema({
   species: String, 
   specied_id: {
     type: Schema.Types.ObjectId,
-    ref: 'species'
+    ref: 'species',
   },
 
   homeworld:  String,
   homeworld_id: {
     type: Schema.Types.ObjectId,
-    ref: 'planet'
+    ref: 'planet',
   },
 
   height: Number, 
 
   films: [{
     
-    title: String,
+    title: String, 
     
     id: {
       type: Schema.Types.ObjectId,
-      ref: 'film'
+      ref: 'film',
     }
   }]
 });
 
-const Person = mongoose.model('people', personSchema);
+const Person = mongoose.model('person', personSchema);
 
 
 // exports all the models in an object to be used in the controller

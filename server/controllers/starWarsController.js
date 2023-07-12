@@ -5,13 +5,15 @@ const starWarsController = {};
 starWarsController.getCharacters = async (req, res, next) => {
   // write code here
   models.Person.find({})
+    .exec()
     .then((result) => {
       console.log(result);
       res.locals = result;
-       
+      next();
     })
-    .catch((err) =>console.log(err.message));
-  next();
+    .catch((err) => {
+      next(err);
+    });
 };
 
 starWarsController.getSpecies = (req, res, next) => {
